@@ -1,16 +1,15 @@
-import {NextPage} from "next";
-import {MenuComponent} from "../shared/menu";
+import { NextPage } from "next";
+import { MainComponent } from "../shared/main.component";
 
 const DogFactsPage: NextPage<{ dogFacts: string[] }> = ({dogFacts}) => {
-    return (<>
-            <MenuComponent />
-            <h1>Random Dog Facts (SSR)</h1>
+    return (<MainComponent>
+            <h1>Random Dog Facts (Server Side Rendering)</h1>
             <ul>
                 {dogFacts.map((fact: string) => (
                     <li key={fact}>{fact}</li>
                 ))}
             </ul>
-        </>
+        </MainComponent>
     )
 }
 export default DogFactsPage;

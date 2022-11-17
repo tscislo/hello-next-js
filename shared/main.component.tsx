@@ -1,4 +1,5 @@
-import {PropsWithChildren, useState} from "react";
+import { useRouter } from "next/router";
+import { PropsWithChildren, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -14,10 +15,27 @@ import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 
 const drawerWidth = 240;
-const navItems = ['SSG', 'ISSG', 'SSR', 'CSR'];
+const navItems = [
+    {
+        name: 'SSG',
+        link: '/dog-facts-ssg'
+    },
+    {
+        name: 'ISSG',
+        link: '/dog-facts-issg'
+    },
+    {
+        name: 'SSR',
+        link: '/dog-facts-ssr'
+    },
+    {
+        name: 'CSR',
+        link: '/dog-facts-csr'
+    }];
 
 export const MainComponent = ({children}: PropsWithChildren) => {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const router = useRouter()
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -31,9 +49,11 @@ export const MainComponent = ({children}: PropsWithChildren) => {
             <Divider/>
             <List>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{textAlign: 'center'}}>
-                            <ListItemText primary={item}/>
+                    <ListItem key={item.name} disablePadding>
+                        <ListItemButton
+                            onClick={() => router.push(item.link)}
+                            sx={{textAlign: 'center'}}>
+                            <ListItemText primary={item.name}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -63,8 +83,10 @@ export const MainComponent = ({children}: PropsWithChildren) => {
                     </Typography>
                     <Box sx={{display: {xs: 'none', sm: 'block'}}}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{color: '#fff'}}>
-                                {item}
+                            <Button
+                                onClick={() => router.push(item.link)}
+                                key={item.name} sx={{color: '#fff'}}>
+                                {item.name}
                             </Button>
                         ))}
                     </Box>
