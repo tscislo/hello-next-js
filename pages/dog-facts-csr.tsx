@@ -1,17 +1,19 @@
 import { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MainComponent } from "../shared/main.component";
 
-const DogFactsPage: NextPage<{ dogFacts: string[] }> = ({dogFacts}) => {
+const DogFactsPage: NextPage = () => {
+    const [dogFacts, setDogFacts] = useState([]);
     const controller = new AbortController();
     const signal = controller.signal;
 
     useEffect(() => {
         fetch('https://api.allorigins.win/raw?url=https://dog-api.kinduff.com/api/facts?number=5', {signal})
             .then((response) => response.json())
+            .then(res => setDogFacts(res.facts))
             .catch(() => [])
         return () => {
-            // controller.abort();
+            controller.abort();
         }
     }, []);
 

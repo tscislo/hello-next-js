@@ -30,6 +30,6 @@ export const getStaticProps: GetStaticProps = async () => {
         props: {
             dogFacts: dogFacts.facts
         },
-        revalidate: 2
+        revalidate: 10 // In seconds
     }
 }

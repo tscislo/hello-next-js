@@ -7,7 +7,7 @@ const DogFactsPage: NextPage<{ dogFacts: string[] }> = ({dogFacts}) => {
     setTimeout(() => incCounter(counter + 1), 1000)
     return (<MainComponent>
             <h1>Random Dog Facts (Static Site Generation)</h1>
-            <p>{counter}</p>
+            <p>Client side counter: {counter}</p>
             <ul>
                 {dogFacts.map((fact: string) => (
                     <li key={fact}>{fact}</li>
